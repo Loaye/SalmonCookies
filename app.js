@@ -38,3 +38,12 @@ var alki = {
 };
 
 alki();
+
+//Creating function to generate random customers per hour
+var oneBetweenHundred = (Math.ceil(Math.random() * 100));
+
+function randomCustomerAmmount(){
+  return oneBetweenHundred();
+}
+
+randomCustomerAmmount();
