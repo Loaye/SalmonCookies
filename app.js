@@ -27,7 +27,7 @@ var capHill = {
   min: 20,
   max: 38,
   avg: 2.3,
-}
+};
 
 capHill();
 
@@ -40,10 +40,26 @@ var alki = {
 alki();
 
 //Creating function to generate random customers per hour
-var oneBetweenHundred = (Math.ceil(Math.random() * 100));
+var oneBetweenHundred = (Math.floor(Math.random() * 100));
 
 function randomCustomerAmmount(){
   return oneBetweenHundred();
 }
 
 randomCustomerAmmount();
+
+//Function that generates random cookie ammount between min and max
+
+function cookieAnHour(min, max, avg){
+  cookieMin = Math.ceil(min);
+  cookieMax = Math.floor(max);
+  var cookieAvg = Math.floor(Math.random() * (cookieMax - cookieMin)) + cookieMin;
+  return(cookieAvg);
+}
+
+cookieAnHour();
+
+//function that creates list of store and grabs cookie per hour, then creates a list over the business day
+function listStore(store){
+
+}
