@@ -14,19 +14,28 @@ Store.prototype.hourly = function(){
   var people = Math.floor(Math.random() * (this.max - this.min)) + this.min;
   console.log('Total People:' + this.avg);
   return(people * this.avg);
-}
+};
 
-//Creating an array to push hourly generated ammount to a define time based off of 12 Hour format
-var listArr[];
+//Create prototype that pushes an array
+Store.prototype.hour = function(){
+  var hourlySales = [];
 
-//business hours
-var time = ['6AM:', '7AM:', '8AM:', '9AM:', '10AM:', '11AM:', '12PM:', '1PM:', '2PM:', '3PM:', '4PM:', '5PM:', '6PM:', '7PM:', '8PM:', 'Total:'];
+  for (var i = 0; i < 14; i++){
+    hourlySales.push(this.hourly);
+  }
+  var totalSales = 0;
 
-//pushing ammounts from hourly function into an empty array
-for (var i = 0; i < 15; i++){
-  listArr.push(time[i]);
-}
+  for (var j = 0; j < hourlySales.length; j++){
+    totalSales = hourlySales[j] + totalSales;
+    console.log(totalSales);
+    hourlySales.push(totalSales);
+    return totalSales;
+  }
 
+};
+
+var places = [pikePlace, seaTac, seattleCenter, capitolHill, alki];
+var data = [];
 
 //add business location and details
 var pikePlace = new Store('First and Pike', 23, 65, 6.3);
