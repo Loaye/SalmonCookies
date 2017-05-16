@@ -46,12 +46,14 @@ function listSales(store) {
   var list = document.createElement('ul');
   var listArr = [];
   var hour = Math.floor(hourlyCookie(store.minCost, store.maxCost, store.avgCost));
+
 //variable to declare business hours
   function businessHours(){
     var time = ['6AM:', '7AM:', '8AM:', '9AM:', '10AM:', '11AM:', '12PM:', '1PM:', '2PM:', '3PM:', '4PM:', '5PM:', '6PM:', '7PM:', '8PM:'];
     for (var i = 0; i < time.length; i++){
       console.log(time[i] + hour);
       listArr.push(time[i]);
+      return businessHours();
     }
   }
 }
