@@ -1,3 +1,10 @@
+
+nav ul li {
+  display: inline-block;
+  margin-right: 70px;
+  margin-top: 45px;
+}
+
 thead{
   background: #000;
 }
