@@ -1,46 +1,37 @@
 'use strict'
 
-//Creating object with min, max, avg
-var storeLocation = [
-  pikeplace = {
+//Creating object with name, min, max, avg cost of cookies
+var pikePlace = {
     name: 'Pike',
     minCost: 23,
     maxCost: 65,
     avgCost: 6.3,
-  },
-  seaTac = {
+  };
+var seaTac = {
     name: 'SeaTac',
     minCost: 3,
     maxCost: 24,
     avgCost: 1.2,
-  },
-  seattleCenter = {
+  };
+var seattleCenter = {
     name: 'Seattle Center',
     minCost: 11,
     maxCost: 38,
     avgCost: 3.7
-  },
-  capitolHill = {
+  };
+var capitolHill = {
     name: 'Captiol Hill',
     minCost: 20,
     maxCost: 38,
     avgCost: 2.3,
-  },
-  alki = {
+  };
+var alki = {
     name: 'Alki',
     minCost: 2,
     maxCost: 16,
     avgCost: 4.6,
-  },
-];
+  };
 
-//variable to declare business hours.. opening to close
-function businessHours(){
-  var time = ['6AM:', '7AM:', '8AM:', '9AM:', '10AM:', '11AM:', '12PM:', '1PM:', '2PM:', '3PM:', '4PM:', '5PM:', '6PM:', '7PM:', '8PM:'];
-  for (var i = 0; i < 15; i++){
-    console.log(time[i]);
-  }
-}
 //Function that generates random cookie ammount per customer
 function hourlyCookie(min, max, avg){
   min = Math.ceil(min);
@@ -54,8 +45,16 @@ function hourlyCookie(min, max, avg){
 function listSales(store) {
   var list = document.createElement('ul');
   var listArr = [];
-  var cookieArr = [];
-  
-
-
   var hour = Math.floor(hourlyCookie(store.minCost, store.maxCost, store.avgCost));
+//variable to declare business hours
+  function businessHours(){
+    var time = ['6AM:', '7AM:', '8AM:', '9AM:', '10AM:', '11AM:', '12PM:', '1PM:', '2PM:', '3PM:', '4PM:', '5PM:', '6PM:', '7PM:', '8PM:'];
+    for (var i = 0; i < time.length; i++){
+      console.log(time[i] + hour);
+      listArr.push(time[i]);
+    }
+  }
+}
+
+hourlyCookie();
+listSales();
