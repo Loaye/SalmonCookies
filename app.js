@@ -1,3 +1,5 @@
+'use strict'
+
 //Creating object with min, max, avg
 var storeLocation = [
   pikeplace = {
@@ -53,10 +55,7 @@ function listSales(store) {
   var list = document.createElement('ul');
   var listArr = [];
   var cookieArr = [];
-
-
-
-
+  
 
 
   var hour = Math.floor(hourlyCookie(store.minCost, store.maxCost, store.avgCost));
