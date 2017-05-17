@@ -66,10 +66,10 @@ for (var k = 0; k < places.length; k++){
   );
 }
 
-var newRow;
-
+var new_row;
+console.log(data);
 for (var l = 0; l < data.length; l++){
-  newRow = document.createElement('tr');
-  newRow.innerHTML = data[l];
-  table.appendChild(newRow);
+  new_row = document.createElement('tr');
+  new_row.innerHTML = data[l];
+  table.appendChild(new_row);
 }
