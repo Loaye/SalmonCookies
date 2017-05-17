@@ -1,0 +1,15 @@
+
+nav ul li {
+  display: inline-block;
+  margin-right: 70px;
+  margin-top: 45px;
+}
+
+thead{
+  background: #000;
+}
+
+td{
+  padding: 20px;
+  border: solid 1px black;
+}
