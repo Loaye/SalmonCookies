@@ -1,5 +1,8 @@
 'use strict';
 
+var form = document.getElementById('data_form');
+var table = document.getElementById('shell');
+
 function Store(building, min, max, avg){
   this.building = building;
   this.min = min;
@@ -18,9 +21,19 @@ Store.prototype.hourly = function(){
 
 //Function that takes total sales and pushes it back to Constructor
 Store.prototype.generateSales = function(){
-  for (var i = 0; i < 15; i++){
+  var total = 0;
+  for (var i = 0; i < 14; i++){
+    var sales = this.hourly();
     this.cookieSales.push(this.hourly());
+    total += Math.ceil(sales);
   }
+  this.cookieSales.push(total);
+};
+
+Store.prototype.render = function (){
+  var row = document.createElement('tr');
+  row.innerHTML = this.cookieSales.join('');
+  table.appendChild(row);
 };
 
 //add business building and details
@@ -31,8 +44,6 @@ var capitolHill = new Store('Capitol Hill', 20, 28, 2.3);
 var alki = new Store('Alki', 2, 16, 4.6);
 
 var building = [pikePlace, seaTac, seattleCenter, capitolHill, alki];
-
-
 
 Store.prototype.getSales = function(){
   var table = document.getElementById('shell');
@@ -49,8 +60,6 @@ Store.prototype.getSales = function(){
   var new_row;
   new_row = document.createElement('tr');
   new_row.innerHTML = data.join('');
-  console.log(new_row);
-  console.log(table);
   table.appendChild(new_row);
 };
 
@@ -58,3 +67,19 @@ for (var i = 0; i < building.length; i++){
   building[i].generateSales();
   building[i].getSales();
 }
+
+function newStore(event) {
+  event.preventDefault();
+
+  var building = event.target.building.value;
+  var min = event.target.min.value;
+  var max = event.target.max.value;
+  var avg = event.target.avg.value;
+
+  var addStore = new Store(building, min, max, avg);
+  addStore.getSales();
+  addStore.render();
+  form.reset();
+}
+
+form.addEventListener('submit', newStore);
