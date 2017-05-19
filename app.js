@@ -1,3 +1,4 @@
+
 'use strict';
 
 function Store(building, min, max, avg){
