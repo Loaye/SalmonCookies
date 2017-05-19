@@ -1,63 +1,61 @@
-// 'use strict'
-//
-// //Creating object with name, min, max, avg cost of cookies
-// var pikePlace = {
-//     name: 'Pike',
-//     minCost: 23,
-//     maxCost: 65,
-//     avgCost: 6.3,
-//   };
-// var seaTac = {
-//     name: 'SeaTac',
-//     minCost: 3,
-//     maxCost: 24,
-//     avgCost: 1.2,
-//   };
-// var seattleCenter = {
-//     name: 'Seattle Center',
-//     minCost: 11,
-//     maxCost: 38,
-//     avgCost: 3.7
-//   };
-// var capitolHill = {
-//     name: 'Captiol Hill',
-//     minCost: 20,
-//     maxCost: 38,
-//     avgCost: 2.3,
-//   };
-// var alki = {
-//     name: 'Alki',
-//     minCost: 2,
-//     maxCost: 16,
-//     avgCost: 4.6,
-//   };
-//
-// //Function that generates random cookie ammount per customer
-// function hourlyCookie(min, max, avg){
-//   min = Math.ceil(min);
-//   max = Math.floor(max);
-//   var people = Math.floor(Math.random() * (max - min)) + min;
-//   console.log('Total People:' + avg);
-//   return(people * avg);
-// }
-//
-// //function that creates list of store and grabs cookie per hour, then creates a list over the business day
-// function listSales(store) {
-//   var list = document.createElement('ul');
-//   var listArr = [];
-//   var hour = Math.floor(hourlyCookie(store.minCost, store.maxCost, store.avgCost));
-//
-// //variable to declare business hours
-// function businessHours(){
-//   var time = ['6AM:', '7AM:', '8AM:', '9AM:', '10AM:', '11AM:', '12PM:', '1PM:', '2PM:', '3PM:', '4PM:', '5PM:', '6PM:', '7PM:', '8PM:'];
-//   for (var i = 0; i < time.length; i++){
-//     console.log(time[i] + hour);
-//     listArr.push(time[i]);
-//     return businessHours()
-//     }
-//   }
-// }
-//
-// hourlyCookie();
-// listSales();
-// businessHours();
+
+'use strict';
+
+function Store(building, min, max, avg){
+  this.building = building;
+  this.min = min;
+  this.max = max;
+  this.avg = avg;
+  this.cookieSales = [];
+  this.total = 0;
+}
+
+ //Function that generates total cookie ammount for random customer per hour
+Store.prototype.hourly = function(){
+  var people = Math.floor(Math.random() * (this.max - this.min)) + this.min;
+  console.log('Total People:' + this.avg);
+  return Math.floor(people * this.avg);
+};
+
+//Function that takes total sales and pushes it back to Constructor
+Store.prototype.generateSales = function(){
+  for (var i = 0; i < 15; i++){
+    this.cookieSales.push(this.hourly());
+  }
+};
+
+//add business building and details
+var pikePlace = new Store('First and Pike', 23, 65, 6.3);
+var seaTac = new Store('SeaTac Airport', 3, 24, 1.2);
+var seattleCenter = new Store('Seattle Center', 11, 38, 3.7);
+var capitolHill = new Store('Capitol Hill', 20, 28, 2.3);
+var alki = new Store('Alki', 2, 16, 4.6);
+
+var building = [pikePlace, seaTac, seattleCenter, capitolHill, alki];
+
+
+
+Store.prototype.getSales = function(){
+  var table = document.getElementById('shell');
+  var data = [];
+
+  data.push('<td>' + this.building + '</td>');
+
+  for (var i = 0; i <this.cookieSales.length; i++){
+    data.push(
+      '<td>' + this.cookieSales[i] + '</td>'
+      );
+  }
+
+  var new_row;
+  new_row = document.createElement('tr');
+  new_row.innerHTML = data.join('');
+  console.log(new_row);
+  console.log(table);
+  table.appendChild(new_row);
+};
+
+for (var i = 0; i < building.length; i++){
+  building[i].generateSales();
+  building[i].getSales();
+}
