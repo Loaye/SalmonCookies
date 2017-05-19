@@ -31,15 +31,17 @@ var capitolHill = new Store('Capitol Hill', 20, 28, 2.3);
 var alki = new Store('Alki', 2, 16, 4.6);
 
 var building = [pikePlace, seaTac, seattleCenter, capitolHill, alki];
+
 for (var i = 0; i < building.length; i++){
   building[i].generateSales();
+  console.log(building[i].cookieSales);
 }
 
 Store.prototype.getSales = function(){
   var table = document.getElementsByClassName('shell');
   var data = [];
 
-  for (var i = 0; i < building.length; i++){
+  for (var i = 0; i <this.cookieSales.length; i++){
     data.push(
       '<td>' + this.cookieSales[0] + '</td>' +
       '<td>' + this.cookieSales[1] + '</td>' +
@@ -57,7 +59,7 @@ Store.prototype.getSales = function(){
       '<td>' + this.cookieSales[13] + '</td>' +
       '<td>' + this.cookieSales[14] + '</td>' +
       '<td>' + this.cookieSales[15] + '</td>'
-    );
+      );
   }
 
   var new_row;
