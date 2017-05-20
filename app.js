@@ -30,11 +30,18 @@ Store.prototype.generateSales = function(){
   this.cookieSales.push(total);
 };
 
-Store.prototype.render = function (){
+function makeStore(building, min, max, avg) {
+  var makeStore = new Store(building, min, max, avg);
   var row = document.createElement('tr');
-  row.innerHTML = this.cookieSales.join('');
+  // row.innerHTML = this.cookieSales.join('');
   table.appendChild(row);
-};
+  console.log('makeStore', makeStore);
+}
+
+makeStore();
+
+Store.prototype.render();
+
 
 //add business building and details
 var pikePlace = new Store('First and Pike', 23, 65, 6.3);
@@ -68,18 +75,20 @@ for (var i = 0; i < building.length; i++){
   building[i].getSales();
 }
 
+
 function newStore(event) {
   event.preventDefault();
 
   var building = event.target.building.value;
-  var min = event.target.min.value;
-  var max = event.target.max.value;
-  var avg = event.target.avg.value;
+  var min = parseInt(event.target.min.value);
+  var max = parseInt(event.target.max.value);
+  var avg = parseInt(event.target.avg.value);
 
   var addStore = new Store(building, min, max, avg);
   addStore.getSales();
   addStore.render();
   form.reset();
 }
+
 
 form.addEventListener('submit', newStore);
