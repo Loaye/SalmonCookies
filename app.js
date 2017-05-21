@@ -60,6 +60,7 @@ Store.prototype.listSales = function(){
   document.body.appendChild(new_row);
 };
 
+
 createHeader();
 for (var i = 0; i < storeArr.length; i++){
   storeArr[i].listSales();
@@ -79,3 +80,8 @@ function makeStore(e){
 }
 
 form.addEventListener('submit', makeStore);
+
+for (var i = 0; i < building.length; i++){
+  building[i].generateSales();
+  building[i].getSales();
+}
