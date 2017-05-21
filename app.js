@@ -1,6 +1,8 @@
 
 'use strict';
-// Construct Store object
+var form = document.getElementById('data_form');
+var table = document.getElementById('shell');
+
 function Store(place, min, max, avg) {
   this.place = place;
   this.min = min;
@@ -8,7 +10,7 @@ function Store(place, min, max, avg) {
   this.avg = avg;
 }
 
-Store.prototype.cookiesPerHr = function(){
+Store.prototype.cookiesAnHour = function(){
   var people = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
   return people * this.avg;
 };
@@ -22,7 +24,7 @@ var alki = new Store('Alki', 2, 16, 4.6);
 var storeArr = [firstAndPike, seaTac, seattleCenter, capitolHill, alki];
 
 function createHeader(){
-  var timeArr = ['Store', '6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', 'Total:'];
+  var timeArr = ['Store', '6:00AM', '7:00AM', '8:00AM', '9:00AM', '10:00AM', '11:00AM', '12:00PM', '1:00PM', '200PM', '300PM', '400PM', '500PM', '600PM', '700PM', 'Total:'];
   var row_header = [];
   for (var i=0; i < timeArr.length; i++){
     row_header.push('<td>' + timeArr[i] + '</td>');
@@ -40,7 +42,7 @@ Store.prototype.listSales = function(){
 
   listArr.push('<td>' + this.place + '</td>');
   for (var i=0; i < 14; i++){
-    var currentHour = Math.floor(this.cookiesPerHr());
+    var currentHour = Math.floor(this.cookiesAnHour());
     console.log('Cookies: ', currentHour);
     listArr.push('<td>' + currentHour + '</td>');
     cookieArr.push(currentHour);
@@ -63,3 +65,18 @@ createHeader();
 for (var i = 0; i < storeArr.length; i++){
   storeArr[i].listSales();
 }
+
+function makeStore(e){
+  e.preventDefault();
+
+  var place = e.target.place.value;
+  var min = e.target.min.value;
+  var max = e.target.max.value;
+  var avg = e.target.avg.value;
+
+  var newStore = new Store(place, min, max, avg);
+  newStore.cookiesAnHour();
+  form.reset();
+}
+
+form.addEventListener('submit', makeStore);
