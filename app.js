@@ -1,7 +1,6 @@
 
 'use strict';
 var form = document.getElementById('data_form');
-var table = document.getElementById('shell');
 
 function Store(place, min, max, avg) {
   this.place = place;
