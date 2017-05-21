@@ -13,7 +13,7 @@ Store.prototype.cookiesPerHr = function(){
   return people * this.avg;
 };
 
-var firstAndPike = new Store('1st & Pike', 23, 65, 6.3);
+var firstAndPike = new Store('First & Pike', 23, 65, 6.3);
 var seaTac = new Store('SeaTac Airport', 3, 24, 1.2);
 var seattleCenter = new Store('Seattle Center', 11, 38, 3.7);
 var capitolHill = new Store('Capitol Hill', 20, 38, 4.6);
@@ -46,10 +46,9 @@ Store.prototype.listSales = function(){
     cookieArr.push(currentHour);
   }
 
-// This loops through cookieArr and adds each number together to get the total of all of them.
   var totalCookies = 0;
-  for (var h=0; h < cookieArr.length; h++){
-    totalCookies = totalCookies + cookieArr[h];
+  for (var k = 0; k < cookieArr.length; k++){
+    totalCookies = totalCookies + cookieArr[k];
   }
 
   listArr.push('<td>' + totalCookies + '</td>');
@@ -61,7 +60,6 @@ Store.prototype.listSales = function(){
 };
 
 createHeader();
-// This loops through the array of store objects to run the listSales function for all 5 of them
 for (var i = 0; i < storeArr.length; i++){
   storeArr[i].listSales();
 }
