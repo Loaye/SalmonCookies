@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Sales Database</title>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
   </head>
@@ -12,22 +13,22 @@
     <form id="data_form">
       <fieldset>
         <label for="building">Location</label>
-        <input type="text" name="building"  placeholder="Enter the location" required>
+        <input type="text" place="building"  placeholder="Enter the location" required>
       </fieldset>
 
       <fieldset>
         <label for="min">Minimum</label>
-        <input type="text" name="min" placeholder="Minimun Cost" required>
+        <input type="text" place="min" placeholder="Minimun Cost" required>
       </fieldset>
 
       <fieldset>
         <label for="max">Maximun</label>
-        <input for="max" name="max" placeholder="Maximun Cost" required>
+        <input for="max" place="max" placeholder="Maximun Cost" required>
       </fieldset>
 
       <fieldset>
         <label for="avg">Average</label>
-        <input for="avg" name="avg" placeholder="Average Cost" required>
+        <input for="avg" place="avg" placeholder="Average Cost" required>
       </fieldset>
 
       <button id="submit-button" type="submit">Add Store!</button>
@@ -37,22 +38,6 @@
       <sec class="left">
         <table>
           <thead id="operation_hours">
-            <td>Stores:</td>
-            <td>6:00AM</td>
-            <td>7:00AM</td>
-            <td>8:00AM</td>
-            <td>9:00AM</td>
-            <td>10:00AM</td>
-            <td>11:00AM</td>
-            <td>12:00PM</td>
-            <td>1:00PM</td>
-            <td>2:00PM</td>
-            <td>3:00PM</td>
-            <td>4:00PM</td>
-            <td>5:00PM</td>
-            <td>6:00PM</td>
-            <td>7:00PM</td>
-            <td>Total:</td>
           </thead>
           <tbody id="shell">
             <!--Table Content Here-->
@@ -61,5 +46,5 @@
       </sec>
     </main>
   </body>
-  <script src = "newapp.js"></script>
+  <script src = "app.js"></script>
 </html>

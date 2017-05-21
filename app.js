@@ -1,94 +1,67 @@
+
 'use strict';
-
-var form = document.getElementById('data_form');
-var table = document.getElementById('shell');
-
-function Store(building, min, max, avg){
-  this.building = building;
+// Construct Store object
+function Store(place, min, max, avg) {
+  this.place = place;
   this.min = min;
   this.max = max;
   this.avg = avg;
-  this.cookieSales = [];
-  this.total = 0;
 }
 
- //Function that generates total cookie ammount for random customer per hour
-Store.prototype.hourly = function(){
-  var people = Math.floor(Math.random() * (this.max - this.min)) + this.min;
-  console.log('Total People:' + this.avg);
-  return Math.floor(people * this.avg);
+Store.prototype.cookiesPerHr = function(){
+  var people = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
+  return people * this.avg;
 };
 
-//Function that takes total sales and pushes it back to Constructor
-Store.prototype.generateSales = function(){
-  var total = 0;
-  for (var i = 0; i < 14; i++){
-    var sales = this.hourly();
-    this.cookieSales.push(this.hourly());
-    total += Math.ceil(sales);
-  }
-  this.cookieSales.push(total);
-};
-
-function makeStore(building, min, max, avg) {
-  var makeStore = new Store(building, min, max, avg);
-  var row = document.createElement('tr');
-  // row.innerHTML = this.cookieSales.join('');
-  table.appendChild(row);
-  console.log('makeStore', makeStore);
-}
-
-makeStore();
-
-Store.prototype.render();
-
-
-//add business building and details
-var pikePlace = new Store('First and Pike', 23, 65, 6.3);
+var firstAndPike = new Store('1st & Pike', 23, 65, 6.3);
 var seaTac = new Store('SeaTac Airport', 3, 24, 1.2);
 var seattleCenter = new Store('Seattle Center', 11, 38, 3.7);
-var capitolHill = new Store('Capitol Hill', 20, 28, 2.3);
+var capitolHill = new Store('Capitol Hill', 20, 38, 4.6);
 var alki = new Store('Alki', 2, 16, 4.6);
 
-var building = [pikePlace, seaTac, seattleCenter, capitolHill, alki];
+var storeArr = [firstAndPike, seaTac, seattleCenter, capitolHill, alki];
 
-Store.prototype.getSales = function(){
-  var table = document.getElementById('shell');
-  var data = [];
+function createHeader(){
+  var timeArr = ['Store', '6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', 'Total:'];
+  var row_header = [];
+  for (var i=0; i < timeArr.length; i++){
+    row_header.push('<td>' + timeArr[i] + '</td>');
+  }
+  var row = row_header.join('');
+  console.log(row_header);
+  row_header = document.createElement('thead');
+  row_header.innerHTML = row;
+  document.body.appendChild(row_header);
+}
 
-  data.push('<td>' + this.building + '</td>');
+Store.prototype.listSales = function(){
+  var listArr = [];
+  var cookieArr = [];
 
-  for (var i = 0; i <this.cookieSales.length; i++){
-    data.push(
-      '<td>' + this.cookieSales[i] + '</td>'
-      );
+  listArr.push('<td>' + this.place + '</td>');
+  for (var i=0; i < 14; i++){
+    var currentHour = Math.floor(this.cookiesPerHr());
+    console.log('Cookies: ', currentHour);
+    listArr.push('<td>' + currentHour + '</td>');
+    cookieArr.push(currentHour);
   }
 
-  var new_row;
-  new_row = document.createElement('tr');
-  new_row.innerHTML = data.join('');
-  table.appendChild(new_row);
+// This loops through cookieArr and adds each number together to get the total of all of them.
+  var totalCookies = 0;
+  for (var h=0; h < cookieArr.length; h++){
+    totalCookies = totalCookies + cookieArr[h];
+  }
+
+  listArr.push('<td>' + totalCookies + '</td>');
+  var fullList = listArr.join('');
+
+  var new_row = document.createElement('tr');
+  new_row.innerHTML = fullList;
+  document.body.appendChild(new_row);
 };
 
-for (var i = 0; i < building.length; i++){
-  building[i].generateSales();
-  building[i].getSales();
+createHeader();
+// This loops through the array of store objects to run the listSales function for all 5 of them
+for (var i = 0; i < storeArr.length; i++){
+  storeArr[i].listSales();
 }
-
-
-function newStore(event) {
-  event.preventDefault();
-
-  var building = event.target.building.value;
-  var min = parseInt(event.target.min.value);
-  var max = parseInt(event.target.max.value);
-  var avg = parseInt(event.target.avg.value);
-
-  var addStore = new Store(building, min, max, avg);
-  addStore.getSales();
-  addStore.render();
-  form.reset();
-}
-
-
-form.addEventListener('submit', newStore);
