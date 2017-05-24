@@ -1,0 +1,29 @@
+html{
+  background: #E88D65;
+  width: 960px;
+  height: 1800px;
+  margin: auto;
+}
+
+h3{
+  margin-left: 380px;
+  font-style: italic;
+  text-decoration: underline;
+  font-size: 32px;
+}
+
+span{
+  text-shadow: 1px 1px 10px;
+  margin-left: 320px;
+}
+
+
+#products{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  margin-top: -375px; /* Half the height */
+  margin-left: -175px; /* Half the width */
+  }
